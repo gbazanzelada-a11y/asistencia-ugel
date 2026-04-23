@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Validando...</title>
+</head>
+
+<body>
+
+<h2>Validando código...</h2>
+
+<script>
+
+// tiempo actual
+var ahora = Date.now();
+
+// leer parámetros
+var params = new URLSearchParams(window.location.search);
+var codigo = params.get("codigo");
+var tiempo = params.get("t");
+
+// ⏱️ 30 segundos de validez
+var LIMITE = 30000;
+
+if (!codigo || !tiempo) {
+  document.body.innerHTML = "❌ Código inválido";
+} else {
+
+  if (ahora - tiempo > LIMITE) {
+    document.body.innerHTML = "⛔ QR vencido";
+  } else {
+
+    // 🔴 TU FORMULARIO
+    var form = "https://docs.google.com/forms/d/e/1FAIpQLSemtblAanICJ5dSbgT9bmmHJ2WUCIC_5ZykyEAyr2hg5bUs2w/viewform?usp=dialog";
+
+    window.location.href = form;
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
