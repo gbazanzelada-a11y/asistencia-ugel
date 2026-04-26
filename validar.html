@@ -11,26 +11,24 @@
 
 <script>
 
-// Obtener parámetros
 var params = new URLSearchParams(window.location.search);
 var codigo = params.get("codigo");
 var tiempo = parseInt(params.get("t"));
 
-// Tiempo actual
 var ahora = Date.now();
-var LIMITE = 30000; // 30 segundos
+var LIMITE = 20000; // 20 segundos
 
-// ❌ Si no hay código → error
-if (!codigo) {
+// Validar existencia
+if (!codigo || codigo === "null") {
   document.body.innerHTML = "❌ Código no encontrado";
 } else {
 
-  // ⛔ Si el QR está vencido
+  // Validar tiempo
   if (!tiempo || (ahora - tiempo > LIMITE)) {
     document.body.innerHTML = "⛔ QR vencido";
   } else {
 
-    // ✅ REDIRECCIÓN AL FORMULARIO CORRECTO
+    // REDIRECCIÓN AL FORMULARIO (CORRECTO)
     var form = "https://docs.google.com/forms/d/e/1FAIpQLSfe9GrS4jEcB1vsVz1zTGXdFQ_TfjFDkCNbpT0Y7VpMJy2a8w/viewform?usp=pp_url&entry.2127160421=" + codigo;
 
     window.location.href = form;
