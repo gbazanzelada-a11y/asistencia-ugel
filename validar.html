@@ -11,27 +11,24 @@
 
 <script>
 
-// tiempo actual
-var ahora = Date.now();
-
-// leer parámetros
 var params = new URLSearchParams(window.location.search);
 var codigo = params.get("codigo");
-var tiempo = params.get("t");
+var tiempo = parseInt(params.get("t"));
 
-// ⏱️ 30 segundos de validez
-var LIMITE = 30000;
+var ahora = Date.now();
+var LIMITE = 30000; // 30 segundos
 
-if (!codigo || !tiempo) {
-  document.body.innerHTML = "❌ Código inválido";
+// 🔴 SOLO VALIDAMOS CODIGO
+if (!codigo) {
+  document.body.innerHTML = "❌ Código no encontrado";
 } else {
 
-  if (ahora - tiempo > LIMITE) {
+  // 🔒 VALIDAMOS TIEMPO SOLO SI EXISTE
+  if (tiempo && (ahora - tiempo > LIMITE)) {
     document.body.innerHTML = "⛔ QR vencido";
   } else {
 
-    // 🔴 TU FORMULARIO
-    var form = "https://docs.google.com/forms/d/e/1FAIpQLSemtblAanICJ5dSbgT9bmmHJ2WUCIC_5ZykyEAyr2hg5bUs2w/viewform?usp=dialog";
+    var form = "https://docs.google.com/forms/d/e/1FAIpQLSfe9GrS4jEcB1vsVz1zTGXdFQ_TfjFDkCNbpT0Y7VpMJy2a8w/viewform?usp=pp_url&entry.2127160421=" + codigo;
 
     window.location.href = form;
 
