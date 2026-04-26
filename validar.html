@@ -1,42 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Validando...</title>
-</head>
-
-<body>
-
-<h2>Validando código...</h2>
-
 <script>
 
 var params = new URLSearchParams(window.location.search);
 var codigo = params.get("codigo");
-var tiempo = parseInt(params.get("t"));
+var tiempo = params.get("t");
 
-var ahora = Date.now();
-var LIMITE = 30000; // 30 segundos
-
-// 🔴 SOLO VALIDAMOS CODIGO
-if (!codigo) {
-  document.body.innerHTML = "❌ Código no encontrado";
-} else {
-
-  // 🔒 VALIDAMOS TIEMPO SOLO SI EXISTE
-  if (tiempo && (ahora - tiempo > LIMITE)) {
-    document.body.innerHTML = "⛔ QR vencido";
-  } else {
-
-    var form = "https://docs.google.com/forms/d/e/1FAIpQLSfe9GrS4jEcB1vsVz1zTGXdFQ_TfjFDkCNbpT0Y7VpMJy2a8w/viewform?usp=pp_url&entry.2127160421=" + codigo;
-
-    window.location.href = form;
-
-  }
-
-}
+// 🔍 MOSTRAR LO QUE LLEGA
+document.body.innerHTML += "<br>codigo: " + codigo + "<br>tiempo: " + tiempo;
 
 </script>
-
-</body>
-</html>
