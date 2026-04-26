@@ -13,26 +13,15 @@
 
 var params = new URLSearchParams(window.location.search);
 var codigo = params.get("codigo");
-var tiempo = parseInt(params.get("t"));
 
-var ahora = Date.now();
-
-// 🔥 QR válido por 60 segundos
-var LIMITE = 60000;
-
+// SOLO VALIDAMOS QUE EXISTA
 if (!codigo || codigo === "null") {
   document.body.innerHTML = "❌ Código no encontrado";
 } else {
 
-  if (!tiempo || (ahora - tiempo > LIMITE)) {
-    document.body.innerHTML = "⛔ QR vencido";
-  } else {
+  var form = "https://docs.google.com/forms/d/e/1FAIpQLSfe9GrS4jEcB1vsVz1zTGXdFQ_TfjFDkCNbpT0Y7VpMJy2a8w/viewform?usp=pp_url&entry.2127160421=" + codigo;
 
-    var form = "https://docs.google.com/forms/d/e/1FAIpQLSfe9GrS4jEcB1vsVz1zTGXdFQ_TfjFDkCNbpT0Y7VpMJy2a8w/viewform?usp=pp_url&entry.2127160421=" + codigo;
-
-    window.location.href = form;
-
-  }
+  window.location.href = form;
 
 }
 
