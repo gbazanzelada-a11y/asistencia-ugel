@@ -11,33 +11,30 @@
 
 <script>
 
-// 1. OBTENER CÓDIGO DE LA URL
 var params = new URLSearchParams(window.location.search);
 var codigo = params.get("codigo");
 
-// 2. TU URL DE APPS SCRIPT
 var scriptURL = "https://script.google.com/macros/s/AKfycbwgjEbfQNXfdPn7TbCE10MmlQQn_CpXyNtUPh9cDyfczNTjNioPASRR9JoCl9y28pLe/exec";
 
-// 3. CONSULTAR EL CÓDIGO GUARDADO EN GOOGLE SHEETS
 fetch(scriptURL)
 .then(res => res.text())
 .then(data => {
 
-  // 4. COMPARAR
   if (data == codigo) {
 
-    // ✅ SI ES CORRECTO → ABRE FORMULARIO
     var form = "https://docs.google.com/forms/d/e/1FAIpQLSfe9GrS4jEcB1vsVz1zTGXdFQ_TfjFDkCNbpT0Y7VpMJy2a8w/viewform?usp=pp_url&entry.2127160421=" + codigo;
 
     window.location.href = form;
 
   } else {
 
-    // ❌ SI NO → BLOQUEA
     document.body.innerHTML = "❌ QR inválido o vencido";
 
   }
 
+})
+.catch(() => {
+  document.body.innerHTML = "⚠️ Error de conexión";
 });
 
 </script>
